@@ -44,7 +44,7 @@ impl Tag {
        let tag = Tag  {
         id: values[0],
         humidity: (values[1] / 2) as f64,
-        temperature: (values[2] as f64) + ((values[3] as f64 * 0.01)),
+        temperature: if ( values[2] & 0x80 == 0x80) { (-1 * (values[2] & 0x7f) as i8) as f64} else { (values[2] & 0x7f) as f64 } + ((values[3] as f64 * 0.01)),
         pressure: (((values[4] as u32) << 8) | values[5] as u32)  + 50000,
         acceleration: Acceleration{
             x: (((values[6] as i16) << 8) | values[7] as i16),
@@ -69,23 +69,26 @@ fn discover_tags() -> Result<Tag, Box<Error>>{
 
         'device_loop: for d in devices {
             let device = Device::new(d.clone());
-            let vendor_data = device.get_manufacturer_data();
-            if !vendor_data.contains_key(&0x0499){
-                let mut tag = Tag::new(vendor_data);
+            let vendor_data = device.get_manufacturer_data().unwrap();
+            if vendor_data.contains_key(&0x0499){
+                println!("vendor data {:?}", vendor_data);
+                let mut tag = Tag::new(vendor_data).unwrap();
+                println!("Temperature {:?}", tag.temperature);
+                println!("Humidity {:?}", tag.humidity);
             }
             try!(adapter.remove_device(device.get_id()));
         }
         try!(session.stop_discovery());
-        Ok(tag)
+        
     }
     
 }
 
-fn fn main() {
+fn main() {
     match discover_tags() {
-        Ok(tag) => println!("Temperature: {:?}", tag.temperature),
-        Err(e) => println!("Error {:?}", e);,
-    }
+        Ok(tag) => println!("Temperature: {:?}", tag),
+        Err(e) => println!("Error {:?}", e),
+    };
 }
 
 
@@ -113,4 +116,11 @@ fn invalid_manufacturer_id() {
     assert_eq!(Tag::new(packet).is_err(), true);
     //TODO:
     //assert_eq!(Tag::new(packet), TagError::UnknownManufacturerId);
+}
+
+#[test]
+fn minus_degrees(){
+    let mut packet: HashMap<u16, Vec<u8>> = HashMap::new();
+    packet.insert(1177, vec! [3, 111, 133, 94, 198, 212, 2, 197, 2, 224, 255, 255, 11, 95]);
+    assert_eq!(Tag::new(packet).unwrap().temperature, -5.94)
 }
