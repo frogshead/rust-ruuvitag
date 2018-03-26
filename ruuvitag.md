@@ -8,7 +8,9 @@ Alla esimerkki ruuvitagin datasta, ulkoanturi (25.3.2018 ~12:00):
 Manufacturer Data: Ok({1177: [3, 172, 5, 31, 192, 7, 2, 215, 2, 223, 255, 247, 11, 95]})
 ```
 Ja Ruuvitagin [pakettimääritykse](https://github.com/ruuvi/ruuvi-sensor-protocols#data-format-3-protocol-specification) avulla voimme auki kirjoittaa paketin:
+
 1177 --> ID
+
 |arvo   |   merkitys                                                            |
 |-------|-----------------------------------------------------------------------|
 | 3     | paketin speksin version                                               |

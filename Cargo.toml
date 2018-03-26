@@ -3,5 +3,5 @@ name = "rust-ruuvitag"
 version = "0.1.0"
 authors = ["Mikko Viitamäki <mikko.viitamaki+github@gmail.com>"]
 
-[dependencies]
+[target.'cfg(unix)'.dependencies]
 blurz = "0.3.0"
