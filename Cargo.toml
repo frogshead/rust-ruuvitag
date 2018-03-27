@@ -5,3 +5,4 @@ authors = ["Mikko Viitamäki <mikko.viitamaki+github@gmail.com>"]
 
 [target.'cfg(unix)'.dependencies]
 blurz = "0.3.0"
+ruuvitag-lib =  { git = "https://github.com/frogshead/ruuvitag-lib.git", version="0.1.0" }
