@@ -32,8 +32,8 @@ fn discover_tags() -> Result<Tag, Box<Error>> {
                 println!("Temperature {:?}", tag.temperature);
                 println!("Humidity {:?}", tag.humidity);
                 println!("Pressure {:?}", tag.pressure);
-                println!("Battery Voltage {:?}", tag.Voltage);
-                println!("Accelaration x:{:?} y:{:?} z:{:?}", tag.acceleration.x, tag.acceleration.y, tga.acceleration.z);
+                println!("Battery Voltage {:?}", tag.battery_voltage);
+                println!("Accelaration x:{:?} y:{:?} z:{:?}", tag.acceleration.x, tag.acceleration.y, tag.acceleration.z);
 
                 println!("===============================================");
             }
