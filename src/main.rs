@@ -23,18 +23,20 @@ fn discover_tags() -> Result<Tag, Box<Error>> {
         thread::sleep(Duration::from_millis(800));
         let devices = try!(adapter.get_device_list());
 
-        println!("{} device(s) found", devices.len());
+        
         'device_loop: for d in devices {
             let device = Device::new(d.clone());
             let vendor_data = device.get_manufacturer_data().unwrap();
-              if vendor_data.contains_key(&0x0499){
-                    println!("vendor data {:?}", vendor_data);
-                    let tag = Tag::new(vendor).unwrap();
-                  //let mut tag = r::ruuvitag::Tag::new(vendor_data).unwrap();
-                 println!("Temperature {:?}", tag.temperature);
-                  println!("Humidity {:?}", tag.humidity);
+            if vendor_data.contains_key(&0x0499) {
+                let tag = Tag::new(vendor_data).unwrap();
+                println!("Temperature {:?}", tag.temperature);
+                println!("Humidity {:?}", tag.humidity);
+                println!("Pressure {:?}", tag.pressure);
+                println!("Battery Voltage {:?}", tag.Voltage);
+                println!("Accelaration x:{:?} y:{:?} z:{:?}", tag.acceleration.x, tag.acceleration.y, tga.acceleration.z);
 
- }
+                println!("===============================================");
+            }
 
             try!(adapter.remove_device(device.get_id()));
         }
