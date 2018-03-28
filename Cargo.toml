@@ -3,6 +3,6 @@ name = "rust-ruuvitag"
 version = "0.1.0"
 authors = ["Mikko Viitamäki <mikko.viitamaki+github@gmail.com>"]
 
-[target.'cfg(unix)'.dependencies]
+[dependencies]
 blurz = "0.3.0"
-ruuvitag-lib =  { git = "https://github.com/frogshead/ruuvitag-lib.git", version="0.1.0" }
+ruuvitag =  { git = "https://github.com/frogshead/ruuvitag-lib.git", version="0.1.0" }
