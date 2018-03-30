@@ -7,7 +7,6 @@ use std::error::Error;
 use std::result::Result;
 use std::time::Duration;
 use std::thread;
-use std::collections::HashMap;
 
 use blurz::bluetooth_adapter::BluetoothAdapter as Adapter;
 use blurz::bluetooth_device::BluetoothDevice as Device;
