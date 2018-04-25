@@ -1,12 +1,16 @@
+# Ruuvitag majakka
+
 Manufacrur data palauttaa ID:n ja byte arrayn varsinaisesta mainostetusta datasta (payload).
 >dict ManufacturerData [readonly, optional]
 >
 >Manufacturer specific advertisement data. Keys are 16 bits Manufacturer ID followed >by its byte array value.
 >
 Alla esimerkki ruuvitagin datasta, ulkoanturi (25.3.2018 ~12:00):
+
 ```bash
 Manufacturer Data: Ok({1177: [3, 172, 5, 31, 192, 7, 2, 215, 2, 223, 255, 247, 11, 95]})
 ```
+
 Ja Ruuvitagin [pakettimääritykse](https://github.com/ruuvi/ruuvi-sensor-protocols#data-format-3-protocol-specification) avulla voimme auki kirjoittaa paketin:
 
 1177 --> ID
@@ -30,9 +34,9 @@ Ja Ruuvitagin [pakettimääritykse](https://github.com/ruuvi/ruuvi-sensor-protoc
 
 Alla kolmosversion speksi githubista:
 >## Data Format 3 Protocol Specification
->The data is decoded from "Manufacturer Specific Data" -field, for more details please check [this article]>(http://www.argenox.com/a-ble-advertising-primer/) out.
->Manufacturer ID is 0x0499. 
->The actual data payload is: 
+>The data is decoded from "Manufacturer Specific Data" -field, for more details please check [this article](http://www.argenox.com/a-ble-advertising-primer/) out.
+>Manufacturer ID is 0x0499.
+>The actual data payload is:
 >
 >Offset | Allowed values | Description
 >-----|:-----:|-----------
@@ -47,6 +51,6 @@ Alla kolmosversion speksi githubista:
 > 12 - 13| `0 ... 65535` | Battery voltage (millivolts). MSB First
 >
 
-
 [Bluetooth Low Energy - Kuinka mainostetaan ympäristöön](http://www.argenox.com/a-ble-advertising-primer/)
+
 [Rust bluetooth crate - blurz](https://crates.io/crates/blurz)
