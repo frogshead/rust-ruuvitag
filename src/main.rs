@@ -1,7 +1,7 @@
 extern crate blurz;
 extern crate ruuvitag;
 
-use ruuvitag::ruuvitag::Tag;
+use ruuvitag::Tag;
 
 use std::error::Error;
 use std::result::Result;
@@ -35,6 +35,7 @@ fn discover_tags() -> Result<Tag, Box<Error>> {
                 println!("Accelaration x:{:?} y:{:?} z:{:?}", tag.acceleration.x, tag.acceleration.y, tag.acceleration.z);
 
                 println!("===============================================");
+                Tag::post_json("http://192.168.1.4:8080/mjsonrust", tag);
             }
 
             try!(adapter.remove_device(device.get_id()));
